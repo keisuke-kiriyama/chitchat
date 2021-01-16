@@ -13,7 +13,7 @@ create table users (
 );
 
 create table sessions (
-    id serial privary key,
+    id serial primary key,
     uuid varchar(64) not null unique,
     email varchar(255),
     user_id integer references users(id),
@@ -25,10 +25,10 @@ create table threads (
     uuid varchar(64) not null unique,
     topic text,
     user_id integer references users(id),
-    created_at tiestamp not null
+    created_at timestamp not null
 );
 
-creatd table posts (
+create table posts (
     id serial primary key,
     uuid varchar(64) not null unique,
     body text,
