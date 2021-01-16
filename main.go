@@ -12,8 +12,8 @@ func main() {
 	mux := http.NewServeMux()
 
 	// TODO: bootstrapでなんかやるっぽい。後で
-	// files := http.FileServer(http.Dir(config.Static))
-	// mux.Handle("/static/", http.StripPrefix("/static/", files))
+	files := http.FileServer(http.Dir(config.Static))
+	mux.Handle("/static/", http.StripPrefix("/static/", files))
 
 	//
 	// all route patterns matched here
