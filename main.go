@@ -11,9 +11,9 @@ func main() {
 	// handle static assets
 	mux := http.NewServeMux()
 
-	// TODO: bootstrapでなんかやるっぽい。後で
-	files := http.FileServer(http.Dir(config.Static))
-	mux.Handle("/static/", http.StripPrefix("/static/", files))
+	// TODO: 後でCSS系のいじったら必要になる？
+	// files := http.FileServer(http.Dir(config.Static))
+	// mux.Handle("/static/", http.StripPrefix("/static/", files))
 
 	//
 	// all route patterns matched here

@@ -67,6 +67,16 @@ func error_message(writer http.ResponseWriter, request *http.Request, msg string
 	http.Redirect(writer, request, strings.Join(url, ""), 302)
 }
 
+func session(writer http.ResponseWriter, request *http.Request) (sess data.Session, err error) {
+	cookie, err := request.Cookie("_cookie")
+	if err == nil {
+		sess = data.Session{Uuid: cookie.value}
+		if ok, _ := sess.Check(); ! ok {
+			err = errors.New("Invalid session")
+		}
+	}
+}
+
 func version() string {
 	return "0.1"
 }
