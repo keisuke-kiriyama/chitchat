@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"text/template"
 )
 
 type Configuration struct {
@@ -48,6 +49,16 @@ func loadConfig() {
 	if err != nil {
 		log.Fatalln("Cannnot get configuration from file", err)
 	}
+}
+
+func generateHTML(writer http.ResponseWriter, data interface{}, filenames ...string) {
+	var files []string
+	for _, file := range filenames {
+		files = append(files, fmt.Sprintf("templates/%s.html", file))
+	}
+
+	templates := template.Must(template.ParseFiles(files...))
+	templates.ExecuteTemplate(writer, "layout", data)
 }
 
 // エラーメッセージを表示するページに遷移させる
